@@ -1,5 +1,5 @@
 """
-ASGI config for electric_motor_trade project.
+ASGI config for savings_finder project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'electric_motor_trade.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'savings_finder.settings')
 
 application = get_asgi_application()

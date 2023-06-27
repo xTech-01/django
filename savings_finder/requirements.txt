@@ -1,0 +1,6 @@
+# !!!update pip first
+# /Users/stella/project_x/clients/xTech/django/.venv/bin/python3 -m pip install --upgrade pip
+
+# psycopg2==2.9.6
+# binary version of psycopg2
+psycopg2-binary==2.9.6
