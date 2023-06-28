@@ -25,17 +25,25 @@ django-admin startproject savings_finder
 
 -> http://localhost:8000
 
+python3 manage.py startapp halpaa_hinta
 
+```
 -settings.py 
     -databases postgres 
     -static dir
     -templates dir
+    -installed_apps 
+        -'halpaa_hinta.apps.HalpaaHintaConfig',
 -folders-same level as manage.py
     -./static/savings_finder/css 
     -./templates/home.html
         -html ref ../static/savings_finder/css js assets/
--views.py
--models.py
+urls.py in halpaa_hinta folder
+    -urls.py in savings_finder folder    
+        -path('', include('halpaa_hinta.urls')),
+```
+
+# python3 manage.py makemigrations
 
 python3 manage.py migrate
 

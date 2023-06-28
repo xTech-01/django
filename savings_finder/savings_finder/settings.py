@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'halpaa_hinta.apps.HalpaaHintaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'savings_finder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'electric_motor_trade',
+        'NAME': 'savings_finder',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',
