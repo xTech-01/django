@@ -31,16 +31,22 @@ python3 manage.py startapp halpaa_hinta
 -settings.py 
     -databases postgres 
     -static dir
-    -templates dir
     -installed_apps 
         -'halpaa_hinta.apps.HalpaaHintaConfig',
--folders-same level as manage.py
-    -./static/savings_finder/css 
-    -./templates/home.html
-        -html ref ../static/savings_finder/css js assets/
-urls.py in halpaa_hinta folder
-    -urls.py in savings_finder folder    
-        -path('', include('halpaa_hinta.urls')),
+-templates, static
+    -halpaa_hinta/templates/halpaa_hinta/home.html
+        --css: ../static/halpaa_hinta/css js: assets/
+    -halpaa_hinta/static/halpaa_hinta/css/
+-urls.py in savings_finder folder    
+     -path('halpaa_hinta/', include('halpaa_hinta.urls'))
+-urls.py in halpaa_hinta folder
+    -path('', views.index, name='index')
+-views.py
+    -return httpresponse, render template html
+-models.py
+    -create db tables
+-python3 manage.py shell
+    -Products.objects.all()
 ```
 
 # python3 manage.py makemigrations
