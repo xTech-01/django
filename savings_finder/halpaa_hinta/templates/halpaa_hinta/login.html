@@ -1,0 +1,36 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Halpaa hintaa - Kirjaudu sisään</title>
+        <link href="{% static 'halpaa_hinta/css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="imgcontainer">
+                <img src="{% static 'halpaa_hinta/images/logo.png' %}" alt="Halpaa hintaa" class="logo">
+            </div>
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <div class="container">
+                <h1>Kirjaudu sisään</h1>
+                <br><br>
+                <label for="username"><b>Käyttäjätunnus</b></label>
+                <input type="text" placeholder="Syötä käyttäjätunnus" name="username" required>
+                <br><br>
+
+                <label for="password"><b>Salasana</b></label>
+                <input type="password" placeholder="Syötä salasana" name="password" required>
+                <br><br>
+
+                <input type="hidden" name="next" value="{{ request.GET.next}}">
+                <button type="submit">Kirjaudu sisään</button>
+
+                <a href="{% url 'home' %}" >Takasin</a>
+
+            </div>
+        </form>
+    </body>
+</html>

@@ -15,7 +15,7 @@ class Users(models.Model):
     
 class Payments(models.Model):
     # Users.payment_set.all()
-    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='payments')
+    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='payments', blank=True, null=True)
     token = models.CharField(max_length=100)
     payment_amount = models.IntegerField(default=0)
     payment_date = models.DateField(auto_now_add=True)

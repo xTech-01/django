@@ -23,7 +23,7 @@ django-admin startproject savings_finder
 
 # python3 manage.py runserver
 
--> http://localhost:8000
+-> http://127.0.0.1:8000/
 
 python3 manage.py startapp halpaa_hinta
 
@@ -35,7 +35,7 @@ python3 manage.py startapp halpaa_hinta
         -'halpaa_hinta.apps.HalpaaHintaConfig',
 -templates, static
     -halpaa_hinta/templates/halpaa_hinta/home.html
-        --css: ../static/halpaa_hinta/css js: assets/
+        --css: href="{% static 'halpaa_hinta/css/styles.css' %}" js: assets/
     -halpaa_hinta/static/halpaa_hinta/css/
 -urls.py in savings_finder folder    
      -path('halpaa_hinta/', include('halpaa_hinta.urls'))

@@ -1,0 +1,51 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Halpaa hintaa - Maksaa</title>
+        <link href="{% static 'halpaa_hinta/css/styles.css' %}" rel="stylesheet" />
+        {% csrf_token %}
+    </head>
+    <body>
+        <form action="{% url 'payment' %}" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <h1>Maksaa</h1>
+                <p>Valitse maksutapa</p>
+                <input type="radio" id="credit_card" name="payment_method" value="credit_card">
+                <label for="credit_card">Luottokortti</label><br>
+                <input type="radio" id="debit_card" name="payment_method" value="debit_card">
+                <label for="debit_card">Pankkikortti</label><br>
+                <input type="radio" id="mobile_pay" name="payment_method" value="mobile_pay">
+                <label for="mobile_pay">MobilePay</label><br>
+                <input type="radio" id="paypal" name="payment_method" value="paypal">
+                <label for="paypal">PayPal</label><br>
+
+                <label for="card_number">Kortti numero</label>
+                <input type="text" id="card_number" name="card_number" required><br><br>
+                <label for="expiry_date">Expiry Date:</label>
+                <input type="text" id="expiry_date" name="expiry_date" required><br><br>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required>
+
+                <p>Valitse toimitustapa</p> 
+                <input type="radio" id="pickup" name="delivery_method" value="pickup">
+                <label for="pickup">Nouto</label><br>
+                <input type="radio" id="delivery" name="delivery_method" value="delivery">
+                <label for="delivery">Kotiinkuljetus</label><br>
+
+                <p>Valitse toimitusosoite</p>
+                <input type="radio" id="home_address" name="delivery_address" value="home_address">
+                <label for="home_address">Kotiosoite</label><br>
+                <input type="radio" id="work_address" name="delivery_address" value="work_address">
+                <label for="work_address">Työosoite</label><br>
+                <input type="radio" id="other_address" name="delivery_address" value="other_address">
+                <label for="other_address">Muu osoite</label><br>
+                
+                <button type="submit">Vahvista </button>
+
+                <a href="{% url 'home' %}" >Takasin</a>
+            </div>
+        </form>
+    </body>
+</html>
