@@ -53,5 +53,17 @@ python3 manage.py startapp halpaa_hinta
 
 python3 manage.py migrate
 
+```
+-Reset db
+    -del migration files except '__init__.py'
+    -del db n create a new db savings_finder 
+        -python3 manage.py migrate halpaa_hinta zero
+            -makemigrations/migrate -> Schemas -> Tables 
+                -> view-edit data/query tool
+-Populate db
+    -'user.json' in savinng_finder/
+        -python3 manage.py loaddata users.json
+```
+
 
 
