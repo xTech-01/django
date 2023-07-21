@@ -1,0 +1,22 @@
+[
+    {
+        "model": "halpaa_hinta.Users",
+        "pk": 1,
+        "fields": {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "password": "pass123",
+            "phone_number": "123-456-7890"
+        }
+    },
+    {
+        "model": "halpaa_hinta.Users",
+        "pk": 2,
+        "fields": {
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "password": "pass456",
+            "phone_number": "987-654-3210"
+        }
+    }
+]

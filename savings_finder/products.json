@@ -1,0 +1,31 @@
+[
+    {
+        "model": "halpaa_hinta.Products",
+        "pk": 1,
+        "fields": {
+            "name": "käsi+imuri",
+            "category": "kodinkoneet",
+            "description": "käsi Pölynimuri 1400W",
+            "image1": "https://www.kodin1.com/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-kodin1-master-catalog/default/dw8b6b6b0a/hi-res/8710103830000.jpg?sw=1200&sh=1200&sm=fit",
+            "price1": 99.99,
+            "source1": "https://www.kodin1.com/kodin1/p%C3%B6lynimuri-1400w-8710103830000",
+            "image2": "https://www.kodin1.com/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-kodin1-master-catalog/default/dw8b6b6b0a/hi-res/8710103830000.jpg?sw=1200&sh=1200&sm=fit",
+            "price2": 89.99,
+            "source2": "https://www.kodin1.com/kodin1/p%C3%B6lynimuri-1000w-8710103830000"
+        }
+    },
+    {
+        "model": "halpaa_hinta.Products",
+        "pk": 2,
+        "fields": {
+            "name": "robotti-imuri",
+            "category": "kodinkoneet",
+            "image2": "https://www.kodin1.com/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-kodin1-master-catalog/default/dw8b6b6b0a/hi-res/8710103830000.jpg?sw=1200&sh=1200&sm=fit",
+            "price2": 189.99,
+            "source2": "https://www.kodin1.com/kodin1/p%C3%B6lynimuri-1000w-8710103830000",
+            "image3": "https://www.kodin1.com/dw/image/v2/BBQV_PRD/on/demandware.static/-/Sites-kodin1-master-catalog/default/dw8b6b6b0a/hi-res/8710103830000.jpg?sw=1200&sh=1200&sm=fit",
+            "price3": 179.99,
+            "source3": "https://www.kodin1.com/kodin1/p%C3%B6lynimuri-1000w-8710103830000"
+        }
+    }
+]
