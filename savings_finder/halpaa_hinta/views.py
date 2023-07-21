@@ -8,6 +8,37 @@ from django.views.decorators.csrf import requires_csrf_token
 
 from .models import Users, Payments, Products
 
+from django.core.cache import cache
+
+class ProductView(ListView):
+    def __init__(self, name, price, source):
+        self.name = name
+        self.price = price
+        self.source = source
+
+    def __str__(self):
+        return f"{self.name} {self.price} {self.source}"
+
+    def __repr__(self):
+        return f"{self.name} {self.price} {self.source}"
+    
+    queryset = Products.objects.filter(name__icontains='tuuletin').values('price1', 'source1')
+
+
+def get_data_from_db_or_cache(data_id):
+    cached_data = cache.get(data_id)
+    if cached_data is not None:
+        return cached_data
+
+    # If data not found in cache, query it from the database
+    data = Products.objects.get(pk=data_id)
+
+    # Store the data in cache for future use (you can set a custom cache timeout)
+    cache.set(data_id, data, timeout=300)  # Cache data for 5 minutes (300 seconds)
+
+    return data
+
+
 # @requires_csrf_token
 def payment(request):
     if request.method == 'POST':
