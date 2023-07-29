@@ -3,7 +3,11 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.template import loader
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+from django.views.generic import ListView
 from django.views.decorators.csrf import requires_csrf_token
 
 from .models import Users, Payments, Products
@@ -11,18 +15,19 @@ from .models import Users, Payments, Products
 from django.core.cache import cache
 
 class ProductView(ListView):
-    def __init__(self, name, price, source):
-        self.name = name
-        self.price = price
-        self.source = source
+    model = Products
+    template_name = 'halpaa_hinta/product_list.html'
+    context_object_name = 'products'
+    paginate_by = 10
+    ordering = ['-price1']
 
-    def __str__(self):
-        return f"{self.name} {self.price} {self.source}"
-
-    def __repr__(self):
-        return f"{self.name} {self.price} {self.source}"
-    
-    queryset = Products.objects.filter(name__icontains='tuuletin').values('price1', 'source1')
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        for product in queryset:
+            # --TODO---
+            # product.price1 = get_data_from_db_or_cache(product.id)
+            print(f"product: {product.name}, price: {product.price1}, source: {product.source1}")
+            return queryset
 
 
 def get_data_from_db_or_cache(data_id):
@@ -38,17 +43,45 @@ def get_data_from_db_or_cache(data_id):
 
     return data
 
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # Users.objects.create(
+            #     name=username,
+            #     email=request.POST.get('email'),
+            #     password=password,
+            # )
+            next_url = request.POST.get('next')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect('home')
+        else:
+            err_msg = "Username or password is incorrect"
+            return render(request, 'halpaa_hinta/login.html', {'error': err_msg})
+    return render(request, 'halpaa_hinta/login.html')
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, "You have been logged out")
+    return redirect('home')
+
 
 # @requires_csrf_token
 def payment(request):
     if request.method == 'POST':
         # user = Users.objects.get(pk=request.POST['user_id'])
-        # token = request.POST.get('stripeToken')
-        token = request.POST.get('card_number')
+        card_number = request.POST.get('card_number')
 
         add = request.POST.get('address')
 
-        if token is not None:
+        
             # charge = stripe.Charge.create(
             #     amount=1000,
             #     currency='usd',
@@ -61,7 +94,7 @@ def payment(request):
             #     payment_amount=1000,
             # )
             # return HttpResponse(f"Payment successful, {payment}")
-            return redirect('processed_payment')
+        return redirect('processed_payment')
     return render(request, 'halpaa_hinta/payment.html')
 
 # @requires_csrf_token

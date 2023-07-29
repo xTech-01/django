@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Halpaa Hinta - Tuotelistaus</title>
+</head>
+<body>
+    <h1>Tuotelistaus</h1>
+    <table>
+        <tr>
+            <th>Tuotenumero</th>
+            <th>Tuotenimi</th>
+            <th>Hinta</th>
+            <th>Varastosaldo</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price}}</td>
+            <td>{{ product.source }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Tuotelistaus</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong>
+            Price: ${{ product.price }}<br>
+            Description: {{ product.description }}<br>
+            <a href="/product/{{ product.product_id }}">Lisää </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; Ensimmäinen</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Edellinen</a>
+                {% endif %}
+                <span class="page-current">
+                    Sivu {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Seuraava</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -2,6 +2,26 @@ from django.db import models
 from datetime import datetime, timedelta
 from django.utils import timezone
 
+class Products(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=100, default='nimi')
+    category = models.CharField(max_length=100, default='All')
+    description = models.CharField(max_length=100, blank=True, null=True)
+    image1 = models.CharField(max_length=1000, blank=True, null=True)
+    price1 = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    source1 = models.CharField(max_length=1000, blank=True, null=True)
+    image2 = models.CharField(max_length=1000, blank=True, null=True)
+    price2 = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    source2 = models.CharField(max_length=1000, blank=True, null=True)
+    image3 = models.CharField(max_length=1000, blank=True, null=True)
+    price3 = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    source3 = models.CharField(max_length=1000, blank=True, null=True)
+    additional_info = models.CharField(max_length=1000, blank=True, null=True)
+    last_updated = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+    
 class Users(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=100, default='John Doe')
@@ -15,7 +35,7 @@ class Users(models.Model):
     
 class Payments(models.Model):
     invoice_number = models.IntegerField(primary_key=True)
-    amount = models.IntegerField(default=0)
+    amount = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     payment_status = models.CharField(max_length=100, default='pending')
     currency = models.CharField(max_length=100, default='EUR')
     payment_type = models.CharField(max_length=100, default='credit card')
@@ -33,25 +53,7 @@ class Payments(models.Model):
     def __str__(self):
         return str(self.invoice_number)
     
-class Products(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=100, default='nimi')
-    category = models.CharField(max_length=100, default='All')
-    description = models.CharField(max_length=100, blank=True, null=True)
-    image1 = models.CharField(max_length=1000, blank=True, null=True)
-    price1 = models.IntegerField(blank=True, null=True)
-    source1 = models.CharField(max_length=1000, blank=True, null=True)
-    image2 = models.CharField(max_length=1000, blank=True, null=True)
-    price2 = models.IntegerField(blank=True, null=True)
-    source2 = models.CharField(max_length=1000, blank=True, null=True)
-    image3 = models.CharField(max_length=1000, blank=True, null=True)
-    price3 = models.IntegerField(blank=True, null=True)
-    source3 = models.CharField(max_length=1000, blank=True, null=True)
-    additional_info = models.CharField(max_length=1000, blank=True, null=True)
-    last_updated = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return self.name
     
 
 
