@@ -1,33 +1,44 @@
 # It's not rocket science, don't panic
 
 ## production
-
+```
 python3 manage.py collectstatic
--> STATIC_ROOT = '/var/www/static/' 
+    STATIC_ROOT = '/var/www/static/' 
+```
+## testing 
+```
+source .venv/bin/activate
+    cd savings_finder/
+```
+# python3 manage.py runserver
 
-## bootstrap
--> getbootstrap.com
--> startbootstrap.com
+-> http://127.0.0.1:8000/halpaa_hinta/
 
-<!-- 
-{% load static %}
-{link rel='stylesheet' href='{% static 'bootstrap.min.css' %}'}
-<script src='{% static 'bootstrap.min.js' %}'></script>
--->
+# python3 manage.py makemigrations
+
+python3 manage.py migrate
+
+```
+-Reset db
+    -del migration files except '__init__.py'
+    -del db n create a new db savings_finder 
+        -python3 manage.py migrate halpaa_hinta zero
+            -makemigrations/migrate -> Schemas -> Tables 
+                -> view-edit data/query tool
+-Populate db
+    -'user.json' in savinng_finder/
+        -python3 manage.py loaddata users.json
+```
+
 
 ## set-up 
-
+```
 pip install django
 
 django-admin startproject savings_finder
 
-# python3 manage.py runserver
-
--> http://127.0.0.1:8000/
-
 python3 manage.py startapp halpaa_hinta
 
-```
 -settings.py 
     -databases postgres 
     -static dir
@@ -47,23 +58,18 @@ python3 manage.py startapp halpaa_hinta
     -create db tables
 -python3 manage.py shell
     -Products.objects.all()
+
+-bootstrap
+    -getbootstrap.com
+    -startbootstrap.com
+<!-- 
+{% load static %}
+{link rel='stylesheet' href='{% static 'bootstrap.min.css' %}'}
+<script src='{% static 'bootstrap.min.js' %}'></script>
+-->
 ```
 
-# python3 manage.py makemigrations
 
-python3 manage.py migrate
-
-```
--Reset db
-    -del migration files except '__init__.py'
-    -del db n create a new db savings_finder 
-        -python3 manage.py migrate halpaa_hinta zero
-            -makemigrations/migrate -> Schemas -> Tables 
-                -> view-edit data/query tool
--Populate db
-    -'user.json' in savinng_finder/
-        -python3 manage.py loaddata users.json
-```
 
 
 
