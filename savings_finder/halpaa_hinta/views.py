@@ -28,6 +28,19 @@ class ProductView(ListView):
             # product.price1 = get_data_from_db_or_cache(product.id)
             print(f"product: {product.name}, price: {product.price1}, source: {product.source1}")
             return queryset
+        
+class HomeView(ListView):
+    model = Products
+    template_name = 'halpaa_hinta/home.html'
+    context_object_name = 'products'
+    paginate_by = 5
+    ordering = ['name']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        for product in queryset:
+            print(f"product: {product.name}, price: {product.price1}, source: {product.source1}")
+            return queryset
 
 
 def get_data_from_db_or_cache(data_id):
@@ -122,15 +135,6 @@ def login(request):
     return render(request, 'halpaa_hinta/login.html')
 
 
-def home(request):
-    try:
-        tori_prices = Products.objects.filter(name__icontains='tuuletin').values('price1', 'source1')
-        context = {
-            'tori_prices': tori_prices,
-        }
-    except Products.DoesNotExist:
-        raise Http404("No products data")
-    return render(request, 'halpaa_hinta/home.html', context)
 
 
 def index(request):

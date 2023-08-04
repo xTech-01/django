@@ -56,17 +56,36 @@
         </nav>
         <!-- Header-->
         <header class="bg-dark py-5">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search...">
+            </div>
+            <div class="results-container">
+                <ul id="results-list">
+                    <!-- Placeholder for search results -->
+                </ul>
+            </div>
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">
-                        {% if tori_prices %}
-                            {% for price in tori_prices %}
-                                {{ price }}<br>
+                    <h2 class="display-4 fw-bolder">
+                        <table>
+                            <tr>
+                                <th>Tuotenumero</th>
+                                <th>Tuotenimi</th>
+                                <th>Hinta</th>
+                                <th>Varastosaldo</th>
+                            </tr>
+                            {% for product in products %}
+                            <tr>
+                                <td>{{ product.product_id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.price}}</td>
+                                <td>{{ product.source }}</td>
+                            </tr>
                             {% endfor %}
-                        {% else %}
-                            No price found in redis/db
-                        {% endif %}
-                    </h1>
+                        </table>
+                        </ul>
+                    
+                    </h2>
                     <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
                 </div>
             </div>

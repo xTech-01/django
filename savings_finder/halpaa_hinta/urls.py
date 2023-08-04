@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import ProductView
+from .views import ProductView, HomeView
 from . import views
 
 urlpatterns = [
@@ -8,6 +8,6 @@ urlpatterns = [
     path("products/", ProductView.as_view(), name="product_list"),
     path("login/", views.login, name="login"),
     path("payment/", views.payment, name="payment"),
-    path("", views.home, name="home"),
+    path("", HomeView.as_view(), name="home"),
     path("index/", views.index, name="index"),
 ]
