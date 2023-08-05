@@ -7,12 +7,31 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from django.views.generic import ListView
+from django.views.generic import View, ListView
 from django.views.decorators.csrf import requires_csrf_token
+
+import redis 
+import stripe
 
 from .models import Users, Payments, Products
 
 from django.core.cache import cache
+
+
+class SearchView(View):
+    def get(self, request, *args, **kwargs):
+        template_name = 'halpaa_hinta/search.html'
+        query = request.GET.get('q')
+
+        search_results = []
+        keys = cache.keys(f'products:*')
+        for key in keys:
+            data = cache.get(key)
+            if data and query.lower() in data['name'].lower():
+                search_results.append(data)
+
+        return render(request, template_name)
+
 
 class ProductView(ListView):
     model = Products
@@ -41,6 +60,7 @@ class HomeView(ListView):
         for product in queryset:
             print(f"product: {product.name}, price: {product.price1}, source: {product.source1}")
             return queryset
+
 
 
 def get_data_from_db_or_cache(data_id):
